@@ -1,37 +1,93 @@
-[![CI](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml)
-## Template for Python projects with RUFF linter
 
-![1 15_rust_built_python_tools](https://github.com/nogibjj/python-ruff-template/assets/58792/db5f7bda-a977-4c67-acbe-a70fe034fbdf)
+# Mini Project 11: Data Pipeline with Databricks
 
+## Project Purpose
+This project creates a Databricks-based ETL pipeline for processing and analyzing baseball relief pitching statistics, involving PySpark for data processing, Docker containerization for development environment consistency, etc.  
 
+## Project Data Source
+The data used in this project comes FiveThirtyEight's public dataset: https://raw.githubusercontent.com/fivethirtyeight/data/refs/heads/master/goose/goose_rawdata.csv 
 
-1. First thing to do on launch is to open a new shell and verify virtualenv is sourced.
+## Project Highlights
+1. Automated ETL pipeline using Databricks.
+2. Delta Lake integration for reliable data storage
+3. Comprehensive relief pitcher performance analysis
+4. Docker containerization for development
+5. Automated testing suite
 
-Things included are:
+## Project Structure
+```
+├── .devcontainer/        
+├── .github/              
+├── .pytest_cache/        
+├── mylib/               
+│   ├── data/           
+│   ├── __init__.py     
+│   ├── ETL.py          
+│   ├── ETL_nb          
+│   ├── Query.py        
+│   └── Query_nb        
+├── .env                
+├── .gitignore         
+├── check              
+├── Dockerfile        
+├── LICENSE           
+├── main.py           
+├── Makefile          
+├── README.md         
+├── repeat.sh         
+├── requirements.txt  
+├── setup.sh          
+└── test.py           
+```
+## Project Workflows
 
-* `Makefile`
+**1. Setup**
+* Configure environment variables
+* Install dependencies
+* Initialize Databricks connection
 
-* `Pytest`
+**2. Pipeline Execution**
+* Data extraction from FiveThirtyEight
+* Transform: clean, deduplicate, calculate metrics
+* Load to Delta tables
+* Generate analysis reports
 
-* `pandas`
+## Data Pipeline Components
+### ETL (ETL.py)
 
-* `Ruff`:  
+- Extracts data from FiveThirtyEight
 
-Run `make lint` which runs `ruff check`.  You can find out more info on [Ruff here](https://github.com/astral-sh/ruff).
+![Description of the image](images/extract.png)
 
-* `Dockerfile`
+- Performs data cleaning and transformation
 
-* `GitHub copilot`
+![Description of the image](images/transform.png)
 
-* `jupyter` and `ipython` 
+- Loads to Delta tables
 
-* A base set of libraries for devops and web
+![Description of the image](images/load.png)
 
-* `githubactions`
+### Query (Query.py)
 
-## References
+- Calculates performance metrics
+- Generates league statistics
+- Creates player rankings
+- Analyzes team performance
 
-![1 1-function-essence-of-programming](https://github.com/nogibjj/python-ruff-template/assets/58792/f7f33cd3-cff5-4014-98ea-09b6a29c7557)
+![Description of the image](images/query.png)
+
+### Results
+#### Job Runs
+![Description of the image](images/job_run.png)
+
+#### Output
+![Description of the image](images/output.png)
+
+Pipeline outputs stored in Delta tables:
+
+- `/dbfs/FileStore/tables/goose_data: Raw data`
+- `/dbfs/FileStore/tables/processed_goose_data: Transformed data`
+- `/dbfs/FileStore/tables/analysis_top_performers: Analysis results`
 
 
 
